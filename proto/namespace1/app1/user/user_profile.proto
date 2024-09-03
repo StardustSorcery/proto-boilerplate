@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package dev.ggtk.boilerplate.namespace1.app1.user.profile;
+
+import "google/protobuf/timestamp.proto";
+
+service UserProfileService {
+  rpc Get (GetUserProfileRequest) returns (GetUserProfileResponse);
+  rpc Update (UpdateUserProfileRequest) returns (UpdateUserProfileResponse);
+}
+
+// Get
+message GetUserProfileRequest {
+  string id = 1;
+}
+
+message GetUserProfileResponse {
+  UserProfile user_profile = 1;
+}
+
+// Update
+message UpdateUserProfileRequest {
+  string id = 1;
+
+  optional string display_name = 2;
+  optional bytes photo = 3;
+  optional string description = 4;
+}
+
+message UpdateUserProfileResponse {
+  UserProfile user_profile = 1;
+}
+
+// (Core)
+message UserProfile {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp modified_at = 3;
+
+  string display_name = 4;
+  string photo_url = 5;
+  string description = 6;
+}
