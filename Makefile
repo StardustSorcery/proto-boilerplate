@@ -4,7 +4,7 @@ PROTO_FILES = $$(find proto -iname *.proto)
 check:
 	@\
 	mkdir -p dist/python; \
-	RESULT="$$(protoc --python_out=dist/python ${PROTO_FILES} 2>&1)"; \
+	RESULT="$$(protoc --proto_path=proto --python_out=dist/python ${PROTO_FILES} 2>&1)"; \
 	EXIT_CODE=$$?; \
 	if [ $$EXIT_CODE -eq 1 ]; then \
 		printf "\033[31mValidation Failed ------------------------\033[m\n"; \
