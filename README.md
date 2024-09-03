@@ -1,1 +1,1 @@
-# protos-boilerplate
+# proto-boilerplate
