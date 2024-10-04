@@ -7,7 +7,7 @@
     }
   },
   "scripts": {
-    "prepare": "npm run build",
+    "postinstall": "npm run build",
     "build": "node ./scripts/build.js",
     "test": "make check"
   },
