@@ -2,10 +2,12 @@ const path = require('node:path');
 const fs = require('node:fs');
 const cp = require('node:child_process');
 
+console.log(__dirname)
+
 // constants
 const distDirPath = path.join(__dirname, '../dist/js');
 const sourceDirPath = path.join(__dirname, '../proto');
-const protocGenTsExecPath = path.join(__dirname, '../node_modules/.bin/protoc-gen-ts')
+const protocGenTsExecPath = path.join(__dirname, '../.node_modules/.bin/protoc-gen-ts')
 
 // force remove dist dir
 fs.rmSync(distDirPath, { recursive: true, force: true });
@@ -43,7 +45,7 @@ const buildResult = cp
       'grpc_tools_node_protoc',
       '-I',
       sourceDirPath,
-      `--plugin=protoc-gen-ts=${protocGenTsExecPath}`,
+      `--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts`,
       `--js_out=import_style=commonjs,binary:${distDirPath}`,
       `--grpc_out=grpc_js:${distDirPath}`,
       `--ts_out=service=grpc-node,mode=grpc-js:${distDirPath}`,
