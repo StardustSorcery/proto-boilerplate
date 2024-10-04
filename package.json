@@ -1,0 +1,24 @@
+{
+  "name": "@stardustsorcery/proto-boilerplate",
+  "version": "1.0.0",
+  "exports": {
+    "./*": {
+      "default": "./dist/js/*.js"
+    }
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "node ./scripts/build.js",
+    "test": "make check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StardustSorcery/proto-boilerplate.git"
+  },
+  "author": "Yuta NAKAMIZO / Stardust Sorcery",
+  "license": "MIT",
+  "dependencies": {
+    "grpc-tools": "^1.12.4",
+    "ts-protoc-gen": "^0.15.0"
+  }
+}
