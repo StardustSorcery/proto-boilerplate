@@ -2,8 +2,6 @@ const path = require('node:path');
 const fs = require('node:fs');
 const cp = require('node:child_process');
 
-console.log(__dirname)
-
 // constants
 const distDirPath = path.join(__dirname, '../dist/js');
 const sourceDirPath = path.join(__dirname, '../proto');
