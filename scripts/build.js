@@ -7,7 +7,6 @@ console.log(__dirname)
 // constants
 const distDirPath = path.join(__dirname, '../dist/js');
 const sourceDirPath = path.join(__dirname, '../proto');
-const protocGenTsExecPath = path.join(__dirname, '../.node_modules/.bin/protoc-gen-ts')
 
 // force remove dist dir
 fs.rmSync(distDirPath, { recursive: true, force: true });
@@ -37,6 +36,29 @@ const sourceFIlePathList = listProtoFilesResult
   .trim()
   .split('\n');
 
+
+// find protoc-gen-ts path
+const findProtocGenTsPathResult = cp
+  .spawnSync(
+    'npx',
+    [
+      'which',
+      'protoc-gen-ts',
+    ],
+  );
+
+if(findProtocGenTsPathResult.status !== 0) {
+  process.stderr.write(findProtocGenTsPathResult.stderr);
+  process.exit(findProtocGenTsPathResult.status);
+}
+
+const protocGenTsExecPath = findProtocGenTsPathResult
+  .stdout
+  .toString()
+  .trim();
+
+console.log(`[proto-gen-ts exec path] ${protocGenTsExecPath}`);
+
 // build
 const buildResult = cp
   .spawnSync(
@@ -45,7 +67,7 @@ const buildResult = cp
       'grpc_tools_node_protoc',
       '-I',
       sourceDirPath,
-      `--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts`,
+      `--plugin=protoc-gen-ts=${protocGenTsExecPath}`,
       `--js_out=import_style=commonjs,binary:${distDirPath}`,
       `--grpc_out=grpc_js:${distDirPath}`,
       `--ts_out=service=grpc-node,mode=grpc-js:${distDirPath}`,
