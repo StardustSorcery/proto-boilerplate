@@ -2,10 +2,11 @@ const path = require('node:path');
 const fs = require('node:fs');
 const cp = require('node:child_process');
 
+console.log(__dirname)
+
 // constants
 const distDirPath = path.join(__dirname, '../dist/js');
 const sourceDirPath = path.join(__dirname, '../proto');
-const protocGenTsExecPath = path.join(__dirname, '../node_modules/.bin/protoc-gen-ts')
 
 // force remove dist dir
 fs.rmSync(distDirPath, { recursive: true, force: true });
@@ -34,6 +35,27 @@ const sourceFIlePathList = listProtoFilesResult
   .toString()
   .trim()
   .split('\n');
+
+
+// find protoc-gen-ts path
+const findProtocGenTsPathResult = cp
+  .spawnSync(
+    'npx',
+    [
+      'which',
+      'protoc-gen-ts',
+    ],
+  );
+
+if(findProtocGenTsPathResult.status !== 0) {
+  process.stderr.write(findProtocGenTsPathResult.stderr);
+  process.exit(findProtocGenTsPathResult.status);
+}
+
+const protocGenTsExecPath = findProtocGenTsPathResult
+  .stdout
+  .toString()
+  .trim();
 
 // build
 const buildResult = cp

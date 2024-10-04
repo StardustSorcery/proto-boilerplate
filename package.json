@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "grpc-tools": "^1.12.4",
-    "ts-protoc-gen": "^0.15.0"
+    "ts-protoc-gen": "^0.15.0",
+    "which": "^5.0.0"
   }
 }
