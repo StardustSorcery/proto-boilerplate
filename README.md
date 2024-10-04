@@ -2,7 +2,13 @@
 
 ## Usage
 
-### (Recommended) import as git submodule
+### (Recommended / JavaScript Only) install as npm package
+
+```sh
+$ npm install git@github.com:StardustSorcery/proto-boilerplate.git
+```
+
+### import as git submodule
 
 #### 1. Add proto repository to your app repository as git submodule
 
