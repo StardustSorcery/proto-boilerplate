@@ -57,8 +57,6 @@ const protocGenTsExecPath = findProtocGenTsPathResult
   .toString()
   .trim();
 
-console.log(`[proto-gen-ts exec path] ${protocGenTsExecPath}`);
-
 // build
 const buildResult = cp
   .spawnSync(
